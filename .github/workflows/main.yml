@@ -22,4 +22,7 @@ jobs:
           git config user.email github-actions@github.com
           git add .
           git commit -m "Modified Feed"
-          git push
+      - name: Push Only if Changes Exist
+        run: |
+          git status --porcelain > /dev/null 2>&1 && git push
+          # Only pushes if there are changes to commit
