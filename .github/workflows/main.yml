@@ -6,23 +6,5 @@ jobs:
     steps:
       - name: Checkout Repo
         uses: actions/checkout@v3
-      - name: Setup Python
-        uses: actions/setup-python@v4
-        with:
-          python-version: '3.10'
-      - name: Install Dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install pyyaml
       - name: Run Feed Generator
-        run: python feed.py
-      - name: Push Repo
-        run: |
-          git config user.name github-actions
-          git config user.email github-actions@github.com
-          git add .
-          git commit -m "Modified Feed"
-      - name: Push Only if Changes Exist
-        run: |
-          git status --porcelain > /dev/null 2>&1 && git push
-          # Only pushes if there are changes to commit
+        uses: keisalinasdev/podcast-generator@main
